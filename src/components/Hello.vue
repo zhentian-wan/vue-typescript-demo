@@ -2,6 +2,7 @@
   <div class="hello">
     <h1>{{ message }}</h1>
     <button @click="clicked">Click</button>
+    <router-link to="/hello-ts">Hello Ts</router-link>
   </div>
 </template>
 
@@ -21,35 +22,20 @@ export default class Hello extends Vue {
     console.log('created');
   }
 
-  clicked(){
-      console.log('clicked');
-    }
-}
-
-/*
-export default {
-  data () {
-    return {
-      message: 'Welcome to Your Vue.js App'
-    }
-  },
-
-  computed: {
-    fullMessage(){
-      return `${this.message} from Typescript`;
-    }
-  },
-
-  created() {
-    console.log('created');
-  },
-
-  methods: {
-    clicked(){
-      console.log('clicked');
-    }
+  beforeRouteEnter(to, from, next) {
+    console.log("Hello: beforeRouteEnter")
+    next()
   }
-}*/
+
+  beforeRouteLeave(to, from, next) {
+    console.log("Hello: beforeRouteLeave")
+    next()
+  }
+
+  clicked() {
+    console.log('clicked');
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
