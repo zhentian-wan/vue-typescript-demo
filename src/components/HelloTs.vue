@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>HelloTs</h3>
+        <h3 v-colorDirective.color="'green'">HelloTs</h3>
         <router-link to="/">Hello</router-link>
     </div>
 </template>
@@ -8,8 +8,13 @@
 
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import colorDirective from '../color-directive';
 
-@Component({})
+@Component({
+    directives: {
+        colorDirective
+    }
+})
 export default class HelloTs extends Vue {
     created() {
         console.log("HelloTs created!")
