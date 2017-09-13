@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1 v-colorDirective="{color: 'red', backgroundColor: 'blue'}">{{ message }}</h1>
-    <button @click="clicked">Click</button>
+    <button @click="clicked">Click</button> {{sum.acum}}
     <ChildComp :msg="'What a good day!'"/>
     <router-link to="/hello-ts">Hello Ts</router-link>
   </div>
@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {Component} from 'vue-property-decorator'
+import {Component, Watch} from 'vue-property-decorator'
 import colorDirective from '../color-directive';
 
 import ChildComp from './Child.vue';
@@ -24,6 +24,15 @@ import ChildComp from './Child.vue';
 })
 export default class Hello extends Vue {
   message: string = 'Welcome to Your Vue.js App'
+  sum = {
+    acum: 0
+  }
+
+
+  @Watch('sum', {deep: true})
+  watchCount(newVal, oldVal) {
+    console.log("newVal", newVal, "oldVal", oldVal)
+  }
 
   get fullMessage() {
     return `${this.message} from Typescript`
@@ -44,7 +53,7 @@ export default class Hello extends Vue {
   }
 
   clicked() {
-    console.log('clicked');
+    this.sum.acum++;
   }
 }
 </script>
