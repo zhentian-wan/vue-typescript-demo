@@ -2,14 +2,14 @@
   <div class="hello">
     <h1 v-colorDirective="{color: 'red', backgroundColor: 'blue'}">{{ message }}</h1>
     <button @click="clicked">Click</button>
-    <ChildComp msg="'What a good day!'"/>
+    <ChildComp :msg="'What a good day!'"/>
     <router-link to="/hello-ts">Hello Ts</router-link>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import Component from 'vue-class-component'
+import {Component} from 'vue-property-decorator'
 import colorDirective from '../color-directive';
 
 import ChildComp from './Child.vue';
