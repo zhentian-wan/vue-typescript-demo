@@ -1,17 +1,20 @@
 <template>
   <div>
-      {{fullMessage}}
+      {{fullMessage}} -- {{users}}
   </div>
 </template>
 
 <script lang="ts">
 
 import Vue from 'vue'
-import {Component, Prop} from 'vue-property-decorator'
+import {Component, Prop, Inject} from 'vue-property-decorator'
 
 @Component({})
 export default class Child extends Vue {
     message: string = "Hello";
+
+    @Inject('users') users;
+
     @Prop({
         type: String,
         default: 'Default Value'

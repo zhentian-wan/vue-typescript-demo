@@ -9,10 +9,19 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {Component, Watch} from 'vue-property-decorator'
+import {createDecorator} from 'vue-class-component'
+import {Component, Watch, Provide} from 'vue-property-decorator'
 import colorDirective from '../color-directive';
 
 import ChildComp from './Child.vue';
+
+const Log = (msg) => {
+  return createDecorator((component, key) => {
+    console.log("#Component", component);
+    console.log("#Key", key); //log
+    console.log("#Msg", msg); //App
+  })
+}
 
 @Component({
   directives: {
@@ -24,6 +33,15 @@ import ChildComp from './Child.vue';
 })
 export default class Hello extends Vue {
   message: string = 'Welcome to Your Vue.js App'
+
+  @Provide('users')
+  users = [
+    {
+      name: 'test',
+      id: 0
+    }
+  ]
+
   sum = {
     acum: 0
   }
@@ -34,6 +52,7 @@ export default class Hello extends Vue {
     console.log("newVal", newVal, "oldVal", oldVal)
   }
 
+  @Log('fullMessage get called')
   get fullMessage() {
     return `${this.message} from Typescript`
   }
